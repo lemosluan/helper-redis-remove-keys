@@ -8,7 +8,7 @@ const redis = new Redis({
   host: redis_host,
   port: redis_port,
   password: redis_pass,
-  tls: { servername: redis_host },
+  ...(redis_port == 6380 ? { tls: { servername: redis_host } } : {}),
 });
 
 function visitAllKeys(match) {
